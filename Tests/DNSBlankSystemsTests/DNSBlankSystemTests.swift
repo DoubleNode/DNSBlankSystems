@@ -1,7 +1,7 @@
 import XCTest
-@testable import DNSCrashWorkers
+@testable import DNSBlankSystems
 
-final class WKRCrashAnalyticsWorkerTests: XCTestCase {
+final class DNSBlankSystemTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
