@@ -11,6 +11,8 @@ import Foundation
 
 open class SYSBlankBaseSystem: NSObject, PTCLBase_SystemProtocol
 {
+    public var networkConfigurator: PTCLBase_NetworkConfigurator?
+
     override public required init() {
         super.init()
     }
