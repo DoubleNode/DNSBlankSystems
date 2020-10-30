@@ -6,25 +6,33 @@
 //  Copyright © 2020 - 2016 DoubleNode.com. All rights reserved.
 //
 
+import AtomicSwift
 import DNSProtocols
 import Foundation
 
 open class SYSBlankBaseSystem: NSObject, PTCLBase_SystemProtocol
 {
+    @Atomic
+    private var options: [String] = []
+    
     public var networkConfigurator: PTCLBase_NetworkConfigurator?
 
     override public required init() {
         super.init()
     }
-
     open func configure() {
-
     }
-
-    open func enableOption(option: String) {
+    
+    public func checkOption(_ option: String) -> Bool {
+        return self.options.contains(option)
     }
-
-    open func disableOption(option: String) {
+    open func enableOption(_ option: String) {
+        if !self.checkOption(option) {
+            self.options.append(option)
+        }
+    }
+    open func disableOption(_ option: String) {
+        self.options.removeAll { $0 == option }
     }
 
     // MARK: - UIWindowSceneDelegate methods
