@@ -37,7 +37,7 @@ extension DNSBlankSystemsError: DNSError {
     public var errorString: String {
         switch self {
         case .notImplemented:
-            return NSLocalizedString("BLANKSYSTEMS-NotImplemented Error", comment: "")
+            return NSLocalizedString("BLANKSYSTEMS-Not Implemented Error", comment: "")
                 + " (\(Self.domain):\(Self.Code.notImplemented.rawValue))"
         }
     }
