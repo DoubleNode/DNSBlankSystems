@@ -14,7 +14,7 @@ open class SYSBlankBaseSystem: NSObject, PTCLBase_SystemProtocol
 {
     @Atomic
     private var options: [String] = []
-    
+
     public var networkConfigurator: PTCLBase_NetworkConfigurator?
 
     override public required init() {
