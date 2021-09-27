@@ -7,5 +7,4 @@
 //
 
 import DNSError
-import DNSProtocols
 import Foundation

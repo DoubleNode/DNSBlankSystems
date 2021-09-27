@@ -10,12 +10,12 @@ import AtomicSwift
 import DNSProtocols
 import Foundation
 
-open class SYSBlankBaseSystem: NSObject, PTCLBase_SystemProtocol
+open class SYSBlankBaseSystem: NSObject, PTCLSystemProtocolBase
 {
     @Atomic
     private var options: [String] = []
 
-    public var networkConfigurator: PTCLBase_NetworkConfigurator?
+    public var networkConfigurator: PTCLNetworkConfigurator?
 
     override public required init() {
         super.init()
