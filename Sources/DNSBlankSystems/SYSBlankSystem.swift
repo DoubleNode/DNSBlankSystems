@@ -1,5 +1,5 @@
 //
-//  SYSBaseSystem.swift
+//  SYSBlankSystem.swift
 //  DoubleNode Swift Framework (DNSFramework) - DNSBlankSystems
 //
 //  Created by Darren Ehlers.
@@ -12,7 +12,7 @@ import DNSCrashNetwork
 import DNSProtocols
 import Foundation
 
-open class SYSBaseSystem: NSObject, SYSPTCLSystem
+open class SYSBlankSystem: NSObject, SYSPTCLSystem
 {
     static public var languageCode: String {
         DNSCore.languageCode
