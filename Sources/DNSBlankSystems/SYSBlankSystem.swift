@@ -52,5 +52,5 @@ open class SYSBlankSystem: NSObject, SYSPTCLSystem
     // to restore the scene back to its current state.
     open func didEnterBackground() { }
 
-    public var networkConfigurator: NETPTCLConfigurator = NETCrashConfigurator()
+    public var netConfig: NETPTCLConfig = NETCrashConfig()
 }
