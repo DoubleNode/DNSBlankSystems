@@ -18,11 +18,11 @@ open class SYSBlankSystem: NSObject, SYSPTCLSystem
         DNSCore.languageCode
     }
 
-    @Atomic
-    private var options: [String] = []
+    @Atomic private var options: [String] = []
 
     override public required init() {
         super.init()
+        self.configure()
     }
     open func configure() { }
 
