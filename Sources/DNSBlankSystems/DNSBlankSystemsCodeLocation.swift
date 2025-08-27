@@ -11,6 +11,6 @@ import DNSError
 public extension DNSCodeLocation {
     typealias blankSystems = DNSBlankSystemsCodeLocation
 }
-open class DNSBlankSystemsCodeLocation: DNSCodeLocation {
+open class DNSBlankSystemsCodeLocation: DNSCodeLocation, @unchecked Sendable {
     override open class var domainPreface: String { "com.doublenode.blankSystems." }
 }
