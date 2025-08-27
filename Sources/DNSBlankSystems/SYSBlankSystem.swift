@@ -17,6 +17,7 @@ open class SYSBlankSystem: NSObject {
     }
 
     @Atomic private var options: [String] = []
+    private let optionsQueue = DispatchQueue(label: "com.doublenode.blanksystem.options", attributes: .concurrent)
 
     override public required init() {
         super.init()
@@ -26,16 +27,30 @@ open class SYSBlankSystem: NSObject {
 
     public func checkOption(_ option: String) -> Bool {
         guard !option.isEmpty else { return false }
-        return self.options.contains(option)
+        return optionsQueue.sync {
+            return self.options.contains(option)
+        }
     }
     open func enableOption(_ option: String) {
         guard !option.isEmpty else { return }
-        guard !self.checkOption(option) else { return }
-        self.options.append(option)
+        
+        optionsQueue.async(flags: .barrier) { [weak self] in
+            guard let self = self else { return }
+            var currentOptions = self.options
+            guard !currentOptions.contains(option) else { return }
+            currentOptions.append(option)
+            self.options = currentOptions
+        }
     }
     open func disableOption(_ option: String) {
         guard !option.isEmpty else { return }
-        self.options.removeAll { $0 == option }
+        
+        optionsQueue.async(flags: .barrier) { [weak self] in
+            guard let self = self else { return }
+            var currentOptions = self.options
+            currentOptions.removeAll { $0 == option }
+            self.options = currentOptions
+        }
     }
 
     // MARK: - UIWindowSceneDelegate methods

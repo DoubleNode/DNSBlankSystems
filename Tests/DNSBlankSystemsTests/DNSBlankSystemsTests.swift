@@ -159,7 +159,8 @@ final class DNSBlankSystemTests: XCTestCase {
     
     func testConcurrentOptionAccess() {
         let expectation = XCTestExpectation(description: "Concurrent option access")
-        let iterations = 100
+        expectation.expectedFulfillmentCount = 501
+        let iterations = expectation.expectedFulfillmentCount
         let options = (0..<10).map { "option\($0)" }
         let system = sut! // Capture to avoid sendability issues
         
@@ -177,6 +178,17 @@ final class DNSBlankSystemTests: XCTestCase {
             }
         }
         
+        // When
+        DispatchQueue.concurrentPerform(iterations: iterations) { index in
+            let system = system
+            let option = "option-\(index)"
+            system.enableOption(option)
+            XCTAssertTrue(system.checkOption(option), "Option \(option) should be enabled")
+            system.disableOption(option)
+            XCTAssertFalse(system.checkOption(option), "Option \(option) should be disabled")
+            expectation.fulfill()
+        }
+        
         // Verify system is still functional after concurrent access
         sut.enableOption("final-test")
         XCTAssertTrue(sut.checkOption("final-test"), "System should be functional after concurrent access")
@@ -184,7 +196,7 @@ final class DNSBlankSystemTests: XCTestCase {
         expectation.fulfill()
         wait(for: [expectation], timeout: 5.0)
     }
-    
+
     // MARK: - Integration Tests
     
     func testCompleteWorkflow() {
