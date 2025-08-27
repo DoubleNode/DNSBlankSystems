@@ -25,13 +25,16 @@ open class SYSBlankSystem: NSObject {
     open func configure() { }
 
     public func checkOption(_ option: String) -> Bool {
+        guard !option.isEmpty else { return false }
         return self.options.contains(option)
     }
     open func enableOption(_ option: String) {
+        guard !option.isEmpty else { return }
         guard !self.checkOption(option) else { return }
         self.options.append(option)
     }
     open func disableOption(_ option: String) {
+        guard !option.isEmpty else { return }
         self.options.removeAll { $0 == option }
     }
 

@@ -120,7 +120,7 @@ final class DNSBlankSystemTests: XCTestCase {
     func testOptionManagementEdgeCases() {
         // Test with empty string
         sut.enableOption("")
-        XCTAssertTrue(sut.checkOption(""), "Empty string option should be enabled")
+        XCTAssertFalse(sut.checkOption(""), "Empty string option always disabled")
         
         sut.disableOption("")
         XCTAssertFalse(sut.checkOption(""), "Empty string option should be disabled")
