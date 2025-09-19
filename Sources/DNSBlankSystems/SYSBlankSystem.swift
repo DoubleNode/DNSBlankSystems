@@ -7,17 +7,12 @@
 //
 
 import AtomicSwift
-import DNSCore
 import DNSCrashNetwork
 import DNSProtocols
 import Foundation
 
 open class SYSBlankSystem: NSObject, SYSPTCLSystem
 {
-    static public var languageCode: String {
-        DNSCore.languageCode
-    }
-
     @Atomic private var options: [String] = []
 
     override public required init() {
